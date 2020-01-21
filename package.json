@@ -10,7 +10,8 @@
   "scripts": {
     "dev": "npx quasar dev",
     "lint": "eslint --ext .js,.vue src --fix",
-    "test": "echo \"No test specified\" && exit 0"
+    "test": "echo \"No test specified\" && exit 0",
+    "build": "npx quasar build"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
