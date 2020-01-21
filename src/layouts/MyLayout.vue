@@ -34,6 +34,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import { Notify } from 'quasar';
 
 export default {
   name: 'MyLayout',
@@ -59,7 +60,7 @@ export default {
         const { erro, ...street } = await this.$axios.get(`${this.formattedCep}/json`);
 
         if (!erro) {
-          return this.$q.notify({
+          return Notify({
             message: 'Não foi possível encontrar esse CEP. Verifique o CEP digitado e tente novamente.',
             color: 'red-9',
           });
@@ -67,7 +68,7 @@ export default {
 
         return this.$store.dispatch('data/SET_STREET', street);
       } catch (error) {
-        return this.$q.notify({
+        return Notify({
           message: 'Não foi possível fazer a busca no momento. Por favor, tente novamente mais tarde.',
           color: 'red-9',
         });
