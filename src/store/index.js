@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex, { Store } from 'vuex';
 
 import search from './search';
+import data from './data';
 
 Vue.use(Vuex);
 
@@ -17,6 +18,7 @@ Vue.use(Vuex);
 export default () => new Store({
   modules: {
     search,
+    data,
   },
   strict: process.env.DEV,
 });
