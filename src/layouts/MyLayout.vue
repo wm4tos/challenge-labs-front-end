@@ -56,11 +56,18 @@ export default {
   methods: {
     async loadCep() {
       try {
-        const { data: street } = await this.$axios.get(`${this.formattedCep}/json`);
+        const { erro, ...street } = await this.$axios.get(`${this.formattedCep}/json`);
 
-        this.$store.dispatch('data/SET_STREET', street);
+        if (!erro) {
+          return this.$q.notify({
+            message: 'Não foi possível encontrar esse CEP. Verifique o CEP digitado e tente novamente.',
+            color: 'red-9',
+          });
+        }
+
+        return this.$store.dispatch('data/SET_STREET', street);
       } catch (error) {
-        this.$q.notify({
+        return this.$q.notify({
           message: 'Não foi possível fazer a busca no momento. Por favor, tente novamente mais tarde.',
           color: 'red-9',
         });
