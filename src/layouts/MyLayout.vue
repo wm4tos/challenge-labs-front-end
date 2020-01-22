@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'MyLayout',
@@ -54,24 +54,31 @@ export default {
     },
   },
   methods: {
+    ...mapActions({
+      setStreet: 'data/SET_STREET',
+    }),
     async loadCep() {
-      try {
-        const { data: { erro, ...street } } = await this.$axios.get(`${this.formattedCep}/json`);
+      const formatResponse = req => req.data;
+      const validateIfIsError = (data) => {
+        const error = {
+          error: new Error('Não foi possível encontrar esse CEP. Verifique o CEP digitado e tente novamente.'),
+          isMine: true,
+        };
 
-        if (erro) {
-          return this.$q.notify({
-            message: 'Não foi possível encontrar esse CEP. Verifique o CEP digitado e tente novamente.',
-            color: 'red-9',
-          });
-        }
+        if (data.erro) throw error;
 
-        return this.$store.dispatch('data/SET_STREET', street);
-      } catch (error) {
-        return this.$q.notify({
-          message: 'Não foi possível fazer a busca no momento. Por favor, tente novamente mais tarde.',
-          color: 'red-9',
-        });
-      }
+        return data;
+      };
+      const showMessage = ({ error, isMine }) => {
+        const message = isMine ? error.message : 'Não foi possível fazer a busca no momento. Por favor, tente novamente mais tarde';
+        this.$helpers.notifyError(message);
+      };
+
+      this.$axios.get(`${this.formattedCep}/json`)
+        .then(formatResponse)
+        .then(validateIfIsError)
+        .then(this.setStreet)
+        .catch(showMessage);
     },
   },
 };
