@@ -65,7 +65,7 @@ module.exports = function (ctx) {
       gzip: false,
       analyze: false,
       env: {
-        GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY
+        GOOGLE_MAPS_API_KEY: JSON.stringify(process.env.GOOGLE_MAPS_API_KEY)
       },
       // Options below are automatically set depending on the env, set them if you want to override
       // preloadChunks: false,
