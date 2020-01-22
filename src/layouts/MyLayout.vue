@@ -75,11 +75,13 @@ export default {
         const message = error.isMine ? error.error.message : 'Não foi possível fazer a busca no momento. Por favor, tente novamente mais tarde';
         this.$helpers.notifyError(message);
       };
+      const emitLoadedEvent = () => this.$root.$emit('cep-loaded');
 
       this.$axios.get(`https://viacep.com.br/ws/${this.formattedCep}/json`)
         .then(formatResponse)
         .then(validateIfIsError)
         .then(this.setStreet)
+        .then(emitLoadedEvent)
         .catch(showMessage);
     },
   },
