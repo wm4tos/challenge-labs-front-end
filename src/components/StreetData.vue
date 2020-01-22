@@ -6,6 +6,7 @@
 
 <script>
 import StreetInfos from 'components/StreetInfos';
+import { validateProps } from 'src/helpers';
 
 export default {
   components: {
@@ -15,7 +16,7 @@ export default {
     street: {
       type: Object,
       required: true,
-      validator(val) {
+      validator(obj) {
         const props = [
           'logradouro',
           'cep',
@@ -28,9 +29,7 @@ export default {
           'unidade',
         ];
 
-        const hasSomeError = props.map(prop => !Object.prototype.hasOwnProperty.call(val, prop));
-
-        return hasSomeError.some(x => !x);
+        return validateProps(obj, ...props);
       },
     },
   },
