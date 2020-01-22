@@ -57,7 +57,7 @@ export default {
     ...mapActions({
       setStreet: 'data/SET_STREET',
     }),
-    async loadCep() {
+    loadCep() {
       const formatResponse = req => req.data;
       const validateIfIsError = (data) => {
         const error = {
@@ -74,7 +74,7 @@ export default {
         this.$helpers.notifyError(message);
       };
 
-      this.$axios.get(`${this.formattedCep}/json`)
+      this.$axios.get(`https://viacep.com.br/ws/${this.formattedCep}/json`)
         .then(formatResponse)
         .then(validateIfIsError)
         .then(this.setStreet)
