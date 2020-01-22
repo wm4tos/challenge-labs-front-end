@@ -60,6 +60,9 @@ export default {
     }),
     loadCep() {
       this.setEmptyStreet();
+      const emitEvent = (event, ...args) => this.$root.$emit(event, ...args);
+      emitEvent('cep-load-start');
+
       const formatResponse = req => req.data;
       const validateIfIsError = (data) => {
         const error = {
@@ -75,7 +78,7 @@ export default {
         const message = error.isMine ? error.error.message : 'Não foi possível fazer a busca no momento. Por favor, tente novamente mais tarde';
         this.$helpers.notifyError(message);
       };
-      const emitLoadedEvent = () => this.$root.$emit('cep-loaded');
+      const emitLoadedEvent = () => emitEvent('cep-load-finish');
 
       this.$axios.get(`https://viacep.com.br/ws/${this.formattedCep}/json`)
         .then(formatResponse)
