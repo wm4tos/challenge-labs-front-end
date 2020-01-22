@@ -1,17 +1,19 @@
 <template>
   <q-page class="flex flex-center">
-    <street-infos v-bind="street"/>
+    <street-data
+      :street="street"
+    />
   </q-page>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
-import StreetInfos from 'components/StreetInfos.vue';
+import StreetData from 'components/StreetData.vue';
 
 export default {
   name: 'PageIndex',
   components: {
-    StreetInfos,
+    StreetData,
   },
   computed: {
     ...mapGetters({
