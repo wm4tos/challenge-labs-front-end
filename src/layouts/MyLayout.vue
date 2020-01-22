@@ -56,8 +56,10 @@ export default {
   methods: {
     ...mapActions({
       setStreet: 'data/SET_STREET',
+      setEmptyStreet: 'data/SET_EMPTY_STREET',
     }),
     loadCep() {
+      this.setEmptyStreet();
       const formatResponse = req => req.data;
       const validateIfIsError = (data) => {
         const error = {
