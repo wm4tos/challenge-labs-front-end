@@ -8,7 +8,8 @@ module.exports = function (ctx) {
     // https://quasar.dev/quasar-cli/cli-documentation/boot-files
     boot: [
       'axios',
-      'helpers'
+      'helpers',
+      'vue2-google-maps'
     ],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
@@ -63,6 +64,9 @@ module.exports = function (ctx) {
       showProgress: true,
       gzip: false,
       analyze: false,
+      env: {
+        GOOGLE_MAPS_API_KEY: JSON.stringify('AIzaSyC3pvQWNfLYID_aP-HmRUR19Tk1oKKk0Oc')
+      },
       // Options below are automatically set depending on the env, set them if you want to override
       // preloadChunks: false,
       // extractCSS: false,
