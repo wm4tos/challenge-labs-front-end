@@ -71,8 +71,8 @@ export default {
 
         return data;
       };
-      const showMessage = ({ error, isMine }) => {
-        const message = isMine ? error.message : 'Não foi possível fazer a busca no momento. Por favor, tente novamente mais tarde';
+      const showMessage = (error) => {
+        const message = error.isMine ? error.error.message : 'Não foi possível fazer a busca no momento. Por favor, tente novamente mais tarde';
         this.$helpers.notifyError(message);
       };
 
