@@ -1,15 +1,24 @@
 <template>
-  <q-page class="flex flex-center">
-    <street-data
-      v-if="center"
-      :street="street"
-      :center="center"
-    />
+  <q-page class="row">
+    <div class="col-12 flex justify-end">
+      <q-btn
+        class="self-start"
+        icon="close"
+        @click="clearStreetAndCenter"
+      />
+    </div>
+    <div class="col-12 flex justify-center">
+      <street-data
+        v-if="center"
+        :street="street"
+        :center="center"
+      />
+    </div>
   </q-page>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import StreetData from 'components/StreetData.vue';
 
 export default {
@@ -26,6 +35,13 @@ export default {
     }),
   },
   methods: {
+    ...mapActions({
+      setEmptyStreet: 'data/SET_EMPTY_STREET',
+    }),
+    clearStreetAndCenter() {
+      this.setEmptyStreet();
+      this.center = null;
+    },
     loadFullAddres() {
       const formatResponse = req => req.data;
       const validateIfIsError = (data) => {
