@@ -36,12 +36,11 @@ export default {
       },
     },
     center: {
-      type: Object,
       required: true,
-      validator(obj) {
+      validator(val) {
         const props = ['lat', 'lng'];
 
-        return validateProps(obj, ...props);
+        return val === null || validateProps(val, ...props);
       },
     },
   },
