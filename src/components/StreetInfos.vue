@@ -1,5 +1,5 @@
 <template>
-  <div class="text-left full-width full-height row flex-start">
+  <div class="text-left full-width row flex-start">
     <h1 class="col-12"> {{ logradouro }} </h1>
     <p class="col-12">{{ localidade && uf && `${localidade} - ${uf}` }}</p>
     <p class="col-12">{{ bairro }}</p>
