@@ -1,7 +1,10 @@
 <template>
   <div>
     <street-infos v-bind="street"/>
-    <gmap :center="center"/>
+    <gmap
+      v-if="center"
+      :center="center"
+    />
   </div>
 </template>
 
