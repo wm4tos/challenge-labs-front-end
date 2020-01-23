@@ -9,7 +9,7 @@
     </div>
     <div class="col-12 flex justify-center">
       <street-data
-        v-if="center"
+        v-if="street.logradouro"
         :street="street"
         :center="center"
       />
